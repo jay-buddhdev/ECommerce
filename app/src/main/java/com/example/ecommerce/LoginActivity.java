@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                        AdminLink.setVisibility(View.INVISIBLE);
                        NotAdminLink.setVisibility(View.VISIBLE);
                        parentDbName="Admins";
-                       
+
 
                    }
                });
