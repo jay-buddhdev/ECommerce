@@ -39,7 +39,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:hint="Password"
-        android:inputType="number"
+        android:inputType="text"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryDark"
         android:textSize="17sp"

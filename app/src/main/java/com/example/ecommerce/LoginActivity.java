@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecommerce.Models.Users;
@@ -29,8 +30,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText InputPhoneNumber,InputPassword;
     private Button Loginbtn;
     private ProgressDialog loadingBar;
+    private TextView AdminLink,NotAdminLink;
+
     private String parentDbName="User";
     private CheckBox chkBoxRemeberme;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         Loginbtn=(Button)findViewById(R.id.login_btn);
         InputPassword=(EditText) findViewById(R.id.login_password_input);
         InputPhoneNumber=(EditText) findViewById(R.id.login_phone_number_input);
+        AdminLink=(TextView)findViewById(R.id.admin_panel_link);
+        NotAdminLink=(TextView)findViewById(R.id.not_admin_panel_link);
         loadingBar=new ProgressDialog(this);
         chkBoxRemeberme=(CheckBox)findViewById(R.id.remeber_me_chkb);
         Paper.init(this);
@@ -48,6 +54,27 @@ public class LoginActivity extends AppCompatActivity {
                 LoginUser();
             }
         });
+       AdminLink
+               .setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Loginbtn.setText("Login Admin");
+                       AdminLink.setVisibility(View.INVISIBLE);
+                       NotAdminLink.setVisibility(View.VISIBLE);
+                       parentDbName="Admins";
+                       
+
+                   }
+               });
+       NotAdminLink.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Loginbtn.setText("Login");
+               AdminLink.setVisibility(View.VISIBLE);
+               NotAdminLink.setVisibility(View.INVISIBLE);
+               parentDbName="User";
+           }
+       });
     }
 
     private void LoginUser() {
@@ -75,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AllowAccessToAccount(final String phone, final String password) {
 
+
         if(chkBoxRemeberme.isChecked())
         {
             Paper.book().write(Prevalent.UserPhoneKey,phone);
@@ -88,15 +116,29 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child(parentDbName).child(phone).exists())
                 {
+
+
                     Users userData=dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
                     if(userData.getPhone().equals(phone))
                     {
+
                         if(userData.getPassword().equals(password))
                         {
-                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
-                            Intent i=new Intent(LoginActivity.this,HomeActivity.class);
-                            startActivity(i);
+                            if(parentDbName.equals("Admins"))
+                            {
+                                Toast.makeText(LoginActivity.this, "Welcome Admin,Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent i=new Intent(LoginActivity.this,AdminAddNewProductActivity.class);
+                                startActivity(i);
+                            }else if(parentDbName.equals("User"))
+                            {
+                                Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent i=new Intent(LoginActivity.this,HomeActivity.class);
+                                startActivity(i);
+                            }
+
+
                         }
                         else
                         {
@@ -105,6 +147,10 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i=new Intent(LoginActivity.this,LoginActivity.class);
                             startActivity(i);
                         }
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this,"Hello", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
