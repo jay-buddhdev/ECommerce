@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecommerce.Models.Users;
+import com.example.ecommerce.Prevalent.AdminCategoryActivity;
 import com.example.ecommerce.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(LoginActivity.this, "Welcome Admin,Logged in Successfully", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Intent i=new Intent(LoginActivity.this,AdminAddNewProductActivity.class);
+                                Intent i=new Intent(LoginActivity.this, AdminCategoryActivity.class);
                                 startActivity(i);
                             }else if(parentDbName.equals("User"))
                             {
