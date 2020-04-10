@@ -55,8 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginUser();
             }
         });
-       AdminLink
-               .setOnClickListener(new View.OnClickListener() {
+       AdminLink.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
                        Loginbtn.setText("Login Admin");
