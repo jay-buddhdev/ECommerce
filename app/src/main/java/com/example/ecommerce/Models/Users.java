@@ -1,15 +1,24 @@
 package com.example.ecommerce.Models;
 
 public class Users {
-    private String name,phone,password;
+    private String name,phone,image,password;
     public Users()
     {
 
     }
 
-    public Users(String name, String phone, String password) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Users(String name, String phone, String image, String password) {
         this.name = name;
         this.phone = phone;
+        this.image = image;
         this.password = password;
     }
 

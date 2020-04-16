@@ -77,6 +77,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView userNameTextView=headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView=headerView.findViewById(R.id.user_profile_image);
         userNameTextView.setText(Prevalent.currentonlineusers.getName());
+        Picasso.get().load(Prevalent.currentonlineusers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
         recyclerView=findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -160,8 +161,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_setting)
         {
-            //Intent i = new Intent(HomeActivity.this, SettinsActivity.class);
-            //startActivity(i);
+            Intent i = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(i);
         }
         else if (id == R.id.nav_logout)
         {

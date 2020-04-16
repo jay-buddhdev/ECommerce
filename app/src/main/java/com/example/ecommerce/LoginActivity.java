@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button Loginbtn;
     private ProgressDialog loadingBar;
     private TextView AdminLink,NotAdminLink;
-
+    private ImageView back_arrow;
     private String parentDbName="User";
     private CheckBox chkBoxRemeberme;
 
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         InputPhoneNumber=(EditText) findViewById(R.id.login_phone_number_input);
         AdminLink=(TextView)findViewById(R.id.admin_panel_link);
         NotAdminLink=(TextView)findViewById(R.id.not_admin_panel_link);
+        back_arrow=findViewById(R.id.back_arrow_login);
         loadingBar=new ProgressDialog(this);
         chkBoxRemeberme=(CheckBox)findViewById(R.id.remeber_me_chkb);
         Paper.init(this);
@@ -73,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                AdminLink.setVisibility(View.VISIBLE);
                NotAdminLink.setVisibility(View.INVISIBLE);
                parentDbName="User";
+           }
+       });
+       back_arrow.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i=new Intent(LoginActivity.this,MainActivity.class);
+               startActivity(i);
            }
        });
     }
