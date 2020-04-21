@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+            <ImageView
+                android:id="@+id/related_products_image"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/galaxy"/>
+            <TextView
+                android:id="@+id/related_products_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/related_products_image"
+                android:text="Product Name"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="25dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:id="@+id/related_products_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/related_products_name"
+                android:text="Product Price"
+                android:textColor="@android:color/holo_orange_dark"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>

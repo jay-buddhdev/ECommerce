@@ -254,7 +254,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     Toast.makeText(RegisterActivity.this,"This "+phone+"Already Exist",Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Intent i=new Intent(RegisterActivity.this,MainActivity.class);
+                    Intent i=new Intent(RegisterActivity.this,IntroActivity.class);
                     startActivity(i);
 
                 }

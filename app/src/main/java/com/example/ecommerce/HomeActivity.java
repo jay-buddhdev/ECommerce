@@ -44,6 +44,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference ProductRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,24 +86,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-
         FirebaseRecyclerOptions<Products> options=new FirebaseRecyclerOptions.Builder<Products>().setQuery(ProductRef,Products.class).build();
 
-        FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter=new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+        adapter=new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Products model) {
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, final int position, @NonNull final Products model) {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price = "+ model.getPrice() +" $");
+                holder.txtProductPrice.setText("Price = "+ model.getPrice() +"$");
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(HomeActivity.this,ProductDetailsActivity.class);
+                        i.putExtra("key", adapter.getRef(position).getKey());
+                        i.putExtra("pCategory",model.getCategory());
+                        startActivity(i);
+                        finish();
+                    }
+                });
 
             }
 
@@ -116,6 +119,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+
 
     }
 
@@ -168,7 +180,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         {
             Paper.book().destroy();
 
-            Intent i = new Intent(HomeActivity.this, MainActivity.class);
+            Intent i = new Intent(HomeActivity.this, IntroActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
             finish();

@@ -112,7 +112,7 @@ public class SettingsActivity extends AppCompatActivity
         ref.child(Prevalent.currentonlineusers.getPhone()).updateChildren(userMap);
 
 
-        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info Updated Successfully", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -201,7 +201,7 @@ public class SettingsActivity extends AppCompatActivity
                         ref.child(Prevalent.currentonlineusers.getPhone()).updateChildren(userMap);
 
                         progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profile Info Updated Successfully", Toast.LENGTH_SHORT).show();
                         finish();
 
