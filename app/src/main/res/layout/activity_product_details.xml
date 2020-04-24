@@ -66,6 +66,7 @@
                android:layout_below="@+id/product_detail_price"
                >
             <ImageView
+                android:id="@+id/see_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/see_description"

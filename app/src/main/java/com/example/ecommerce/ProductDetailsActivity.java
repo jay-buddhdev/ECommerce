@@ -52,8 +52,11 @@ public class ProductDetailsActivity extends AppCompatActivity
     DatabaseReference request;
     Query query;
     FirebaseDatabase database;
+    private ImageView description;
     private Button addToCart,buyNow;
     ElegantNumberButton numberButton;
+   private String des="";
+    public String image="",product_price="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,6 +68,9 @@ public class ProductDetailsActivity extends AppCompatActivity
         productimage=findViewById(R.id.product_detail_imageview);
         productPrice=findViewById(R.id.product_detail_price);
         productName=findViewById(R.id.product_detail_name);
+        description=findViewById(R.id.see_description);
+
+
 
         addToCart=findViewById(R.id.product_detail_add_cart);
         buyNow=findViewById(R.id.product_detail_buy_now);
@@ -79,7 +85,6 @@ public class ProductDetailsActivity extends AppCompatActivity
 
         query = FirebaseDatabase.getInstance()
                 .getReference("Products").orderByChild("category").equalTo(productCategory);
-        Toast.makeText(this, productCategory, Toast.LENGTH_SHORT).show();
         getRelatedProducts(productCategory);
 
         addToCart.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +93,71 @@ public class ProductDetailsActivity extends AppCompatActivity
                 addToCartList();
             }
         });
+        buyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                directbuynow();
+            }
+        });
+        description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ProductDetailsActivity.this,DescriptionActivity.class);
+                i.putExtra("des",des);
+                startActivity(i);
 
+            }
+        });
+
+    }
+
+    private void directbuynow()
+    {
+        String saveCurrentTime,saveCurrentDate;
+        Calendar calforDate= Calendar.getInstance();
+        SimpleDateFormat currentDate=new SimpleDateFormat("MMM dd,yyyy");
+        saveCurrentDate=currentDate.format(calforDate.getTime());
+
+        SimpleDateFormat currentTime=new SimpleDateFormat("HH:mm::ss a");
+        saveCurrentTime=currentTime.format(calforDate.getTime());
+
+        final DatabaseReference cartListRef=FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+        final HashMap<String,Object> cartMap=new HashMap<>();
+        cartMap.put("key",key);
+        cartMap.put("pname",productName.getText().toString());
+        cartMap.put("price",product_price.toString());
+        cartMap.put("date",saveCurrentDate);
+        cartMap.put("time",saveCurrentTime);
+        cartMap.put("quantity",numberButton.getNumber());
+        cartMap.put("image",image);
+        cartMap.put("discount","");
+
+        cartListRef.child("User View").child(Prevalent.currentonlineusers.getPhone())
+                .child("Products").child(key)
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            cartListRef.child("Admin View").child(Prevalent.currentonlineusers.getPhone())
+                                    .child("Products").child(key)
+                                    .updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+
+                                        Intent i=new Intent(ProductDetailsActivity.this,CartActivity.class);
+                                        startActivity(i);
+                                    }
+
+                                }
+                            });
+                        }
+                    }
+                });
     }
 
     private void addToCartList()
@@ -99,17 +168,18 @@ public class ProductDetailsActivity extends AppCompatActivity
         saveCurrentDate=currentDate.format(calforDate.getTime());
 
         SimpleDateFormat currentTime=new SimpleDateFormat("HH:mm::ss a");
-        saveCurrentTime=currentDate.format(calforDate.getTime());
+        saveCurrentTime=currentTime.format(calforDate.getTime());
 
         final DatabaseReference cartListRef=FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         final HashMap<String,Object> cartMap=new HashMap<>();
         cartMap.put("key",key);
         cartMap.put("pname",productName.getText().toString());
-        cartMap.put("price",productPrice.getText().toString());
+        cartMap.put("price",product_price.toString());
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
+        cartMap.put("image",image);
         cartMap.put("discount","");
 
         cartListRef.child("User View").child(Prevalent.currentonlineusers.getPhone())
@@ -185,13 +255,16 @@ public class ProductDetailsActivity extends AppCompatActivity
         productsRef.child(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Products products=dataSnapshot.getValue(Products.class);
+
                 if(dataSnapshot.exists())
                 {
-
+                    Products products=dataSnapshot.getValue(Products.class);
                     productName.setText(products.getPname());
                     productPrice.setText("Price = "+products.getPrice()+" $");
                     Picasso.get().load(products.getImage()).into(productimage);
+                    image=products.getImage().toString();
+                    product_price=products.getPrice();
+                    des=products.getDescription();
 
                 }
                 else

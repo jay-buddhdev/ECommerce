@@ -1,93 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingtoolbar"
+    tools:context=".CartActivity"
+    android:background="@android:color/white">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp"
+            android:layout_alignParentTop="true"
             android:background="@android:color/white"
             >
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_login"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cart"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginStart="165dp"
-                android:layout_marginEnd="150dp"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="15dp"/>
+         <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/back_arrow"
+             >
+
+         </ImageView>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Cart"
+             android:textSize="18sp"
+             android:textStyle="bold"
+             android:layout_marginStart="180dp"
+             android:textColor="@android:color/black"
+             android:layout_marginEnd="120dp"
+             >
+         </TextView>
         </androidx.appcompat.widget.Toolbar>
-        <RelativeLayout
-            android:layout_below="@+id/toolbar_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-        <ImageView
-            android:id="@+id/back_arrow_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back_arrow"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            />
-
-
-
-        </RelativeLayout>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            android:background="@android:color/white">
-                <RelativeLayout
-                    android:id="@+id/relative_recycler_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_below="@+id/toolbar_cart"
+                    android:layout_marginTop="20dp"
                     android:id="@+id/recycler_cart"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical">
+                    android:scrollbars="vertical"
+                    android:layout_above="@id/cart_relative"
+                    android:visibility="invisible">
                 </androidx.recyclerview.widget.RecyclerView>
-                </RelativeLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/relative_recycler_cart"
-                    android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total">
+    <ImageView
+        android:id="@+id/empty_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_cart"
+        android:layout_marginTop="20dp"
+        android:layout_above="@id/cart_relative"
+        android:src="@drawable/cart_empty"
+        />
+        <RelativeLayout
+    android:id="@+id/cart_relative"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_centerHorizontal="true"
+    >
+    <TextView
+        android:id="@+id/cart_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/black"/>
 
-                        </TextView>
+    <TextView
+        android:id="@+id/cart_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cart_total"
+        android:layout_marginLeft="25dp"
+        android:text="Rp 1,300.3000"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/holo_orange_dark"/>
 
-                </LinearLayout>
+    <Button
+        android:layout_alignLeft="@+id/cart_total"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/cart_checkout"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_sign_in"
+        android:textStyle="bold"
+        android:text="CHECK OUT"/>
 
-        </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/cart_relative_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        >
+
+        <Button
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/cart_start_shopping"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_sign_in"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:text="Start Shopping"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
