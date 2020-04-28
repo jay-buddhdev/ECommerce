@@ -144,8 +144,8 @@
                 android:hint="Name"
                 android:inputType="text"
                 android:padding="20dp"
-                android:textColor="#1E88E5"
-                android:textColorHint="#1E88E5"
+                android:textColor="@android:color/darker_gray"
+                android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -158,11 +158,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/input_design"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="number"
                 android:padding="20dp"
-                android:textColor="#1E88E5"
-                android:textColorHint="#1E88E5"
+                android:textColor="@android:color/darker_gray"
+                android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -175,11 +175,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/input_design"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="20dp"
-                android:textColor="#1E88E5"
-                android:textColorHint="#1E88E5"
+                android:textColor="@android:color/darker_gray"
+                android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
             <EditText
@@ -191,11 +191,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/input_design"
-                android:hint="Address"
+                android:hint="@string/address"
                 android:inputType="textMultiLine"
                 android:padding="20dp"
-                android:textColor="#1E88E5"
-                android:textColorHint="#1E88E5"
+                android:textColor="@android:color/darker_gray"
+                android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -209,7 +209,7 @@
                 android:layout_marginRight="15dp"
                 android:background="@drawable/buttons"
                 android:padding="17dp"
-                android:text="Create Account"
+                android:text="@string/create_account"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />

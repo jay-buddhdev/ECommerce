@@ -39,12 +39,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import static com.example.ecommerce.R.drawable.heart_fill;
+
 public class ProductDetailsActivity extends AppCompatActivity
 {
     private ImageView productimage;
     private TextView productPrice,productName;
     private String key="";
-    private String productCategory="";
+    private String productCategory=null,pcat=null;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference ProductRelated;
@@ -55,8 +57,9 @@ public class ProductDetailsActivity extends AppCompatActivity
     private ImageView description;
     private Button addToCart,buyNow;
     ElegantNumberButton numberButton;
-   private String des="";
-    public String image="",product_price="";
+    private Button wishlist;
+    private String des="";
+    public String image="",product_price="",category="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,8 +72,9 @@ public class ProductDetailsActivity extends AppCompatActivity
         productPrice=findViewById(R.id.product_detail_price);
         productName=findViewById(R.id.product_detail_name);
         description=findViewById(R.id.see_description);
+        wishlist =findViewById(R.id.add_to_wishlist);
 
-
+        Toast.makeText(this, productCategory, Toast.LENGTH_SHORT).show();
 
         addToCart=findViewById(R.id.product_detail_add_cart);
         buyNow=findViewById(R.id.product_detail_buy_now);
@@ -78,14 +82,17 @@ public class ProductDetailsActivity extends AppCompatActivity
        // ProductRelated=  FirebaseDatabase.getInstance().getReference("Products").orderByChild("category").equalTo(getIntent().getStringExtra("pCategory"));
         getProductDetails(key);
 
-       recyclerView=findViewById(R.id.recycler_related_product);
+        recyclerView=findViewById(R.id.recycler_related_product);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(layoutManager);
 
         query = FirebaseDatabase.getInstance()
                 .getReference("Products").orderByChild("category").equalTo(productCategory);
-        getRelatedProducts(productCategory);
+       getRelatedProducts(productCategory);
+
+
+
 
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +116,108 @@ public class ProductDetailsActivity extends AppCompatActivity
             }
         });
 
+        DatabaseReference wish = FirebaseDatabase.getInstance().getReference().child("Wish List").child("User View").child(Prevalent.currentonlineusers.getPhone()).child("Products");
+        wish.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.exists())
+                {
+                    wishlist.setBackgroundResource(heart_fill);
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                DatabaseReference wish = FirebaseDatabase.getInstance().getReference().child("Wish List").child("User View").child(Prevalent.currentonlineusers.getPhone()).child("Products");
+               wish.addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                   {
+                       if(dataSnapshot.exists())
+                       {
+                           wishlist.setBackgroundResource(heart_fill);
+                           addtowishlist();
+                       }
+                       else
+                       {
+                           addtowishlist();
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+
+            }
+        });
+
+    }
+
+
+    private void addtowishlist()
+    {
+        String saveCurrentTime,saveCurrentDate;
+        Calendar calforDate= Calendar.getInstance();
+        SimpleDateFormat currentDate=new SimpleDateFormat("MMM dd,yyyy");
+        saveCurrentDate=currentDate.format(calforDate.getTime());
+
+        SimpleDateFormat currentTime=new SimpleDateFormat("HH:mm::ss a");
+        saveCurrentTime=currentTime.format(calforDate.getTime());
+
+        final DatabaseReference cartListRef=FirebaseDatabase.getInstance().getReference().child("Wish List");
+
+        final HashMap<String,Object> cartMap=new HashMap<>();
+        cartMap.put("key",key);
+        cartMap.put("pname",productName.getText().toString());
+        cartMap.put("price",product_price.toString());
+        cartMap.put("date",saveCurrentDate);
+        cartMap.put("time",saveCurrentTime);
+        cartMap.put("quantity",numberButton.getNumber());
+        cartMap.put("image",image);
+        cartMap.put("category",category.toString());
+        cartMap.put("discount","");
+
+        cartListRef.child("User View").child(Prevalent.currentonlineusers.getPhone())
+                .child("Products").child(key)
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            cartListRef.child("Admin View").child(Prevalent.currentonlineusers.getPhone())
+                                    .child("Products").child(key)
+                                    .updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(ProductDetailsActivity.this, "Added To Wishlist", Toast.LENGTH_SHORT).show();
+                                        Intent i=new Intent(ProductDetailsActivity.this,HomeActivity.class);
+                                        startActivity(i);
+                                    }
+
+                                }
+                            });
+                        }
+                    }
+                });
+
     }
 
     private void directbuynow()
@@ -131,6 +240,7 @@ public class ProductDetailsActivity extends AppCompatActivity
         cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
         cartMap.put("image",image);
+        cartMap.put("category",category.toString());
         cartMap.put("discount","");
 
         cartListRef.child("User View").child(Prevalent.currentonlineusers.getPhone())
@@ -180,6 +290,7 @@ public class ProductDetailsActivity extends AppCompatActivity
         cartMap.put("time",saveCurrentTime);
         cartMap.put("quantity",numberButton.getNumber());
         cartMap.put("image",image);
+        cartMap.put("category",category.toString());
         cartMap.put("discount","");
 
         cartListRef.child("User View").child(Prevalent.currentonlineusers.getPhone())
@@ -246,6 +357,13 @@ public class ProductDetailsActivity extends AppCompatActivity
         };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 
     private void getProductDetails(final String key)
@@ -265,6 +383,7 @@ public class ProductDetailsActivity extends AppCompatActivity
                     image=products.getImage().toString();
                     product_price=products.getPrice();
                     des=products.getDescription();
+                    category=products.getCategory();
 
                 }
                 else

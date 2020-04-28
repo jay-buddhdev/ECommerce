@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Wishlist_activity"
+    android:background="@android:color/white">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_wishlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        >
+        <ImageView
+            android:id="@+id/back_arrow_wishlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_arrow"
+            >
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wish List"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="150dp"
+            android:textColor="@android:color/black"
+            android:layout_marginEnd="120dp"
+            >
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/toolbar_wishlist"
+        android:layout_marginTop="20dp"
+        android:id="@+id/recycler_wishlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_above="@+id/wishlist_relative_empty"
+     >
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/empty_wishlist_image"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_below="@+id/toolbar_wishlist"
+        android:layout_marginTop="168dp"
+        android:visibility="invisible"
+        android:src="@drawable/wish_list" />
+    <TextView
+        android:id="@+id/txt_empty_wishlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/empty_wishlist_image"
+        android:text="Wishlist is Empty"
+        android:textColor="@android:color/black"
+        android:textSize="25dp"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+      android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/txt_empty_wishlist_tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_empty_wishlist"
+        android:text="You havent add any item yet"
+        android:visibility="invisible"
+        android:textColor="@android:color/black"
+        android:textSize="22dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:id="@+id/wishlist_relative_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        >
+
+        <Button
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/explore_btn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_sign_in"
+            android:textStyle="bold"
+            android:text="Explore"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

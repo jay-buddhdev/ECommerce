@@ -35,6 +35,7 @@
                             android:textSize="17sp"
                             android:textStyle="bold"
                             android:layout_alignParentStart="true"
+
                             />
                         <TextView
                             android:id="@+id/update_account_settings_btn"
@@ -97,8 +98,10 @@
                 android:layout_margin="15dp"
                 android:hint="Phone Number"
                 android:textColor="@android:color/black"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:background="@drawable/input_design"/>
             <EditText
+                android:background="@drawable/input_design"
                 android:id="@+id/setting_Full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,6 +120,7 @@
                 android:textColor="@android:color/black"
                 android:layout_margin="15dp"
                 android:hint="Address"
+                android:background="@drawable/input_design"
                 android:padding="10dp"/>
 
         </RelativeLayout>

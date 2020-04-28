@@ -1,14 +1,13 @@
 package com.example.ecommerce.Models;
 
-public class Cart
+public class Wish
 {
     private String key,pname,price,quantity,discount,image,category;
 
-    public Cart()
-    {
+    public Wish() {
     }
 
-    public Cart(String key, String pname, String price, String quantity, String discount, String image, String category) {
+    public Wish(String key, String pname, String price, String quantity, String discount, String image, String category) {
         this.key = key;
         this.pname = pname;
         this.price = price;

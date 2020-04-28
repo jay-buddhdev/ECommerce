@@ -22,4 +22,13 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="password">Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="create_account">Create Account</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="related_products">Related Products</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="buy_now">Buy Now</string>
 </resources>
