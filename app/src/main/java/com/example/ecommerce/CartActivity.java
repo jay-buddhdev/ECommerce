@@ -78,6 +78,15 @@ public class CartActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         datafetch();
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(CartActivity.this,Chekout_Activity.class);
+                i.putExtra("Total_amount",total_price_checkout.getText());
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
