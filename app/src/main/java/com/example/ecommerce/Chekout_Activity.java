@@ -59,6 +59,7 @@ private Button next;
                    String final_address=str1.getText().toString()+","+str2.getText().toString()+","+city.getText().toString()+","+state.getText().toString()+","+country.getText().toString();
                     Toast.makeText(Chekout_Activity.this, final_address, Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(Chekout_Activity.this,Chekout_Summary_Activity.class);
+                    i.putExtra("Amount",Amount);
                     i.putExtra("address",final_address);
                     startActivity(i);
                 }

@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button createAccountbtn;
-    private EditText InputName,InputPhoneNumber,InputPassword,InputAddress;
+    private EditText InputName,InputPhoneNumber,InputPassword,InputAddress,InputEmailAdress;
     private ProgressDialog loadingBar;
     private StorageReference ProfileImageRef;
     private CircleImageView Register_image;
@@ -59,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         InputPhoneNumber=(EditText) findViewById(R.id.register_phone_number_input);
         InputPassword=(EditText) findViewById(R.id.register_password_input);
         InputAddress=(EditText)findViewById(R.id.register_address_input);
+        InputAddress=findViewById(R.id.register_email_input);
         back_arrow=findViewById(R.id.back_arrow_register);
 
         loadingBar=new ProgressDialog(this);
@@ -120,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String phone=InputPhoneNumber.getText().toString();
         final String password=InputPassword.getText().toString();
         final String address=InputAddress.getText().toString();
+        final String email=InputEmailAdress.getText().toString();
         if(TextUtils.isEmpty(name))
         {
             Toast.makeText(this,"Please Write Your name",Toast.LENGTH_SHORT).show();
@@ -135,6 +137,10 @@ public class RegisterActivity extends AppCompatActivity {
         else if(TextUtils.isEmpty(address))
         {
             Toast.makeText(this,"Please Write Your Address",Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(email))
+        {
+            Toast.makeText(this,"Please Write Your E-mail Address",Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -191,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
                             if(downloadImageUrl!=null)
                             {
-                                ValidatephoneNumber(name, phone, password, address, downloadImageUrl);
+                                ValidatephoneNumber(name, phone, password, address, downloadImageUrl,email);
                             }
                             else
                             {
@@ -215,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void ValidatephoneNumber(final String name, final String phone, final String password, final String address, final String finalImage)
+    private void ValidatephoneNumber(final String name, final String phone, final String password, final String address, final String finalImage, final String email)
     {
         final DatabaseReference RootRef;
         RootRef= FirebaseDatabase.getInstance().getReference();
@@ -229,6 +235,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userdataMap.put("password",password);
                     userdataMap.put("name",name);
                     userdataMap.put("address",address);
+                    userdataMap.put("email",email);
                     userdataMap.put("image",finalImage);
 
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:layout_marginStart="20dp"
+       android:text="10, January ,2020"
+       android:textColor="@android:color/black"
+       android:textStyle="bold"
+       android:textSize="15dp"
+       android:id="@+id/order_date"
+       />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/order_date"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_orange_dark"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M5MC5Zo21wIsTUui"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
+            android:id="@+id/order_id"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4500000"
+            android:layout_marginTop="60dp"
+            android:textSize="18dp"
+            android:id="@+id/order_total"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="10dp"/>
+        <Button
+            android:id="@+id/btn_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="45dp"
+            android:text="Shipped"
+            android:textColor="@android:color/holo_blue_bright"
+            android:background="@drawable/button_sign_in"
+            android:layout_marginStart="270dp"/>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

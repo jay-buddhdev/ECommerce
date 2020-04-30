@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -53,7 +59,7 @@ dependencies {
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
 
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
-
+    implementation 'com.razorpay:checkout:1.5.13'
     implementation "com.google.android.material:material:1.1.0-alpha02"
 }
 apply plugin: 'com.android.application'

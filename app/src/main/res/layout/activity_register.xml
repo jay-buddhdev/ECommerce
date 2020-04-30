@@ -52,7 +52,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="80dp"
         android:textSize="20dp"
-        android:textColor="@android:color/white"></TextView>
+        android:textColor="@android:color/white"/>
     <TextView
         android:id="@+id/Already_Account_txt"
         android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/create_account_text"
-        android:textColor="@android:color/white"></TextView>
+        android:textColor="@android:color/white"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                 android:hint="Name"
                 android:inputType="text"
                 android:padding="20dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -161,13 +161,13 @@
                 android:hint="@string/phone_number"
                 android:inputType="number"
                 android:padding="20dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/register_password_input"
+                android:id="@+id/register_email_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/register_phone_number_input"
@@ -175,10 +175,26 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/input_design"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="20dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/register_password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/register_email_input"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="20dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -194,7 +210,7 @@
                 android:hint="@string/address"
                 android:inputType="textMultiLine"
                 android:padding="20dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="17sp"
                 android:textStyle="bold" />
