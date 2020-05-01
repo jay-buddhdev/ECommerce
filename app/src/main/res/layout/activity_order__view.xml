@@ -25,9 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back_arrow"
-            >
+           />
 
-        </ImageView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,8 +36,8 @@
             android:layout_marginStart="150dp"
             android:textColor="@android:color/white"
             android:layout_marginEnd="120dp"
-            >
-        </TextView>
+           />
+
     </androidx.appcompat.widget.Toolbar>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_order"

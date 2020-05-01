@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white">
    <TextView
        android:layout_width="wrap_content"
@@ -19,7 +20,7 @@
         android:layout_height="120dp"
         android:layout_below="@id/order_date"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_orange_dark"
+        app:cardBackgroundColor="@android:color/white"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +47,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="45dp"
             android:text="Shipped"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/black"
             android:background="@drawable/button_sign_in"
             android:layout_marginStart="270dp"/>
     </androidx.cardview.widget.CardView>

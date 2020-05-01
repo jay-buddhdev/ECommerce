@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,11 +51,20 @@ public class Order_View_Activity extends AppCompatActivity {
 
         adapter=new FirebaseRecyclerAdapter<Orders_View, OrderViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder holder, int position, @NonNull Orders_View model)
+            protected void onBindViewHolder(@NonNull OrderViewHolder holder, final int position, @NonNull Orders_View model)
             {
                 holder.txtDate.setText(model.getDate());
                 holder.txtOrderAmount.setText("Rs."+model.getAmount());
                 holder.txtOrderid.setText("Order Id:"+adapter.getRef(position).getKey());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i=new Intent(Order_View_Activity.this,Order_Track_Activity.class);
+                        i.putExtra("key",adapter.getRef(position).getKey());
+                        startActivity(i);
+
+                    }
+                });
               //  holder.status.setText(model.getStatus());
 
             }
