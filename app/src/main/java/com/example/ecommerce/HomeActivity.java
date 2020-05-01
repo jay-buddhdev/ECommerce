@@ -7,7 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ecommerce.Models.Products;
 import com.example.ecommerce.Prevalent.Prevalent;
@@ -46,6 +49,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter;
 
+    private EditText search_txt;
+    private ImageView search_btn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
 
         ProductRef= FirebaseDatabase.getInstance().getReference().child("Products");
+        search_txt=findViewById(R.id.home_search_text);
+        search_btn=findViewById(R.id.search_icon);
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchtxt=search_txt.getText().toString();
+                if(searchtxt==null)
+                {
+                    Toast.makeText(HomeActivity.this, "Please Enter Product Name", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent i=new Intent(HomeActivity.this,Search_Activity.class);
+                    i.putExtra("pname",searchtxt);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
 
         Paper.init(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

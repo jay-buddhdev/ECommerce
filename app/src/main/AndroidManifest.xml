@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Order_Track_Activity"></activity>
+        <activity android:name=".Search_Activity"></activity>
+        <activity android:name=".Order_Track_Activity" />
         <activity android:name=".Order_View_Activity" />
         <activity android:name=".Chekout_Summary_Activity" />
         <activity android:name=".Cart_Edit_Activity" />

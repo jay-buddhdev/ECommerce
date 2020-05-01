@@ -2,10 +2,16 @@ package com.example.ecommerce;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +67,7 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
         amount_dis=findViewById(R.id.txtview_amount);
 
         Checkout.preload(getApplicationContext());
-
+        Toast.makeText(this, Prevalent.currentonlineusers.getPhone(), Toast.LENGTH_SHORT).show();
         Orderef= FirebaseDatabase.getInstance().getReference().child("Orders").child("User View").child(Prevalent.currentonlineusers.getPhone()).push();
         address.setText(getIntent().getStringExtra("address"));
         amount=getIntent().getStringExtra("Amount");
@@ -202,6 +208,29 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
                 }
             }
         });
+
+     //   genrateNotification();
+    }
+
+    private void genrateNotification()
+    {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=
+                    new NotificationChannel("MyNotification","MyNotification",NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager=getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,"MyNotification")
+                .setContentTitle("Order Has Been Placed")
+                .setAutoCancel(true)
+                .setContentText("Dear"+Prevalent.currentonlineusers.getName()+" Your Order Has been Placed and Shipped Soon");
+
+        NotificationManagerCompat manger=NotificationManagerCompat.from(this);
+        manger.notify(999,builder.build());
     }
 
     private void setupPayment(String amount)
