@@ -21,7 +21,7 @@
         android:background="@color/colorPrimary"
         >
         <ImageView
-            android:id="@+id/back_arrow_wishlist"
+            android:id="@+id/back_arrow_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back_arrow"
@@ -71,7 +71,8 @@
         android:layout_below="@id/cardview_order_list_summary"
         android:layout_width="match_parent"
         android:layout_height="320dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@android:color/white">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_summary"
             android:layout_width="match_parent"

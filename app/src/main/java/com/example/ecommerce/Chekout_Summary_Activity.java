@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
     private DatabaseReference Orderef;
     final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
     private  String  amount=null;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
         cod=findViewById(R.id.cod_btn_summary);
         pay=findViewById(R.id.pay_btn_summary);
         amount_dis=findViewById(R.id.txtview_amount);
+        back=findViewById(R.id.back_arrow_summary);
 
         Checkout.preload(getApplicationContext());
         Toast.makeText(this, Prevalent.currentonlineusers.getPhone(), Toast.LENGTH_SHORT).show();
@@ -86,6 +90,14 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
             @Override
             public void onClick(View v) {
                 setupPayment(amount);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Chekout_Summary_Activity.this,Chekout_Activity.class);
+                startActivity(i);
             }
         });
     }

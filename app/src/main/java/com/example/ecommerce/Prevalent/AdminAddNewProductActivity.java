@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.Prevalent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,8 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.ecommerce.Prevalent.AdminCategoryActivity;
+import com.example.ecommerce.Admin_Home_Activity;
+import com.example.ecommerce.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,7 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -204,7 +202,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())
                 {
-                    Intent i=new Intent(AdminAddNewProductActivity.this, AdminCategoryActivity.class);
+                    Intent i=new Intent(AdminAddNewProductActivity.this, Admin_Home_Activity.class);
                     startActivity(i);
                     loadingBar.dismiss();
                     Toast.makeText(AdminAddNewProductActivity.this, "Product is Added Successfully", Toast.LENGTH_SHORT).show();

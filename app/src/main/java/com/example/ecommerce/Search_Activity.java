@@ -52,20 +52,22 @@ public class Search_Activity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, final int position, @NonNull final Products model)
             {
-                holder.txtProductName.setText(model.getPname());
-                holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price = "+ model.getPrice() +"$");
-                Picasso.get().load(model.getImage()).into(holder.imageView);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(Search_Activity.this,ProductDetailsActivity.class);
-                        i.putExtra("key", adapter.getRef(position).getKey());
-                        i.putExtra("pCategory",model.getCategory());
-                        startActivity(i);
-                        finish();
-                    }
-                });
+                if(model.getPname().contains(search)) {
+                    holder.txtProductName.setText(model.getPname());
+                    holder.txtProductDescription.setText(model.getDescription());
+                    holder.txtProductPrice.setText("Price = " + model.getPrice() + "$");
+                    Picasso.get().load(model.getImage()).into(holder.imageView);
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Search_Activity.this, ProductDetailsActivity.class);
+                            i.putExtra("key", adapter.getRef(position).getKey());
+                            i.putExtra("pCategory", model.getCategory());
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+                }
 
 
             }

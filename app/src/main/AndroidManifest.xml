@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ecommerce">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,7 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Search_Activity"></activity>
+        <activity android:name=".Admin_add_product_Activity"></activity>
+        <activity android:name=".Admin_Orders_Activity" />
+        <activity android:name=".Admin_edit_product_Activity" />
+        <activity android:name=".Admin_Home_Activity" />
+        <activity android:name=".Search_Activity" />
         <activity android:name=".Order_Track_Activity" />
         <activity android:name=".Order_View_Activity" />
         <activity android:name=".Chekout_Summary_Activity" />
@@ -29,12 +34,7 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Prevalent.AdminCategoryActivity" />
-        <activity
-            android:name=".AdminCategoryActivity"
-            android:label="@string/title_activity_admin_category"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AdminAddNewProductActivity" />
+        <activity android:name=".Prevalent.AdminAddNewProductActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".IntroActivity">
