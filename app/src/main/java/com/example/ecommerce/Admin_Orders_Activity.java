@@ -24,10 +24,7 @@ public class Admin_Orders_Activity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.add_Products:
-                        startActivity(new Intent(getApplicationContext(),Admin_add_product_Activity.class));
-                        overridePendingTransition(0,0);
-                        return true;
+
                     case R.id.home_dashboard:
                         startActivity(new Intent(getApplicationContext(),Admin_Home_Activity.class));
                         overridePendingTransition(0,0);

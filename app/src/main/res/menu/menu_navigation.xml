@@ -4,9 +4,7 @@
     <item android:id="@+id/home_dashboard"
         android:title="Home"
         android:icon="@drawable/home_icon"/>
-    <item android:id="@+id/add_Products"
-        android:title="Add Products"
-       android:icon="@drawable/add_product_admin" />
+
     <item android:id="@+id/view_Products"
         android:title="View Products"
         android:icon="@drawable/edit_product_admin"

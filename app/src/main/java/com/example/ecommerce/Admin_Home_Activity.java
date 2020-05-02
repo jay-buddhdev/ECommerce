@@ -60,10 +60,6 @@ public class Admin_Home_Activity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.add_Products:
-                        startActivity(new Intent(getApplicationContext(), Admin_add_product_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
                     case R.id.home_dashboard:
                         return true;
                     case R.id.view_Products:
