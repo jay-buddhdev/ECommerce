@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecommerce.Prevalent.Prevalent;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -135,6 +142,91 @@ public class Admin_Change_Product_Detail_Activity extends AppCompatActivity {
     }
 
     private void productInfosaved() {
+        if(TextUtils.isEmpty(pname.getText().toString()))
+        {
+            Toast.makeText(this, "Product Name is Mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(desciption.getText().toString()))
+        {
+            Toast.makeText(this, "Description is Mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(price.getText().toString()))
+        {
+            Toast.makeText(this, "Price is Mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(category.getText().toString()))
+        {
+            Toast.makeText(this, "Category is Mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if(checked.equals("clicked"))
+        {
+            uploadImage(key);
+        }
+    }
+
+    private void uploadImage(final String key)
+    {
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle("Update Product");
+        progressDialog.setMessage("Please Wait, While We are updating your Product Information");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        if(imageUri!=null)
+        {
+            final StorageReference fileRef=storageProductpicRef.child(key+".jpg");
+            uploadTask=fileRef.putFile(imageUri);
+            uploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception
+                {
+                    if(!task.isSuccessful())
+                    {
+                        Log.e("task", "then: ",task.getException() );
+                        throw task.getException();
+                    }
+                    return  fileRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful())
+                    {
+                        Uri downloadUri=task.getResult();
+                        myUri=downloadUri.toString();
+                        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Products");
+                        HashMap<String,Object> userMap=new HashMap<>();
+                        userMap.put("pname",pname.getText().toString());
+                        userMap.put("description",desciption.getText().toString());
+                        userMap.put("price",price.getText().toString());
+                        userMap.put("category",category.getText().toString());
+                        userMap.put("image",myUri);
+
+                        ref.child(key).updateChildren(userMap);
+                        progressDialog.dismiss();
+
+                        startActivity(new Intent(Admin_Change_Product_Detail_Activity.this,Admin_Home_Activity.class));
+                        Toast.makeText(Admin_Change_Product_Detail_Activity.this, "Product Info Updated Successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    }
+                    else
+                    {
+                        progressDialog.dismiss();
+                        Toast.makeText(Admin_Change_Product_Detail_Activity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(this, "Image is Not Selected", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void userProductDisplay(final CircleImageView productImageView, final EditText pname, final EditText desciption, final EditText price, String key)

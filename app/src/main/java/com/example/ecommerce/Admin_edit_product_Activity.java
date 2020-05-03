@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.ecommerce.Models.Category;
 import com.example.ecommerce.Models.Products;
+import com.example.ecommerce.Prevalent.AdminAddNewProductActivity;
 import com.example.ecommerce.Prevalent.Prevalent;
 import com.example.ecommerce.ViewHolder.CategoryViewHolder;
 import com.example.ecommerce.ViewHolder.ProductViewHolder;
@@ -90,11 +91,21 @@ public class Admin_edit_product_Activity extends AppCompatActivity {
 
         adapter=new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CategoryViewHolder holder, int position, @NonNull Category model)
+            protected void onBindViewHolder(@NonNull CategoryViewHolder holder, int position, @NonNull final Category model)
             {
                 holder.txtCategoryName.setText(model.getCategoryName());
                 Picasso.get().load(model.getImage()).into(holder.CategoryImage);
                 category.add(position,model.getCategoryName());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i=new Intent(Admin_edit_product_Activity.this,Category_Products_Activity.class);
+                        i.putExtra("pCategory",model.getCategoryName());
+                        startActivity(i);
+                    }
+                });
+
 
             }
 
@@ -124,9 +135,9 @@ public class Admin_edit_product_Activity extends AppCompatActivity {
             {
                 case ItemTouchHelper.LEFT:
                     adapter.notifyItemRemoved(viewHolder.getPosition());
-                    Intent intent = new Intent(Admin_edit_product_Activity.this, Category_Products_Activity.class);
+                    Intent intent = new Intent(Admin_edit_product_Activity.this, AdminAddNewProductActivity.class);
                     //intent.putExtra("key", keys.get(viewHolder.getPosition()));
-                    intent.putExtra("pCategory", category.get(viewHolder.getPosition()));
+                    intent.putExtra("Category", category.get(viewHolder.getPosition()));
                     startActivity(intent);
                     finish();
                     break;

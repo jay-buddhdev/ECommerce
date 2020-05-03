@@ -10,14 +10,35 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_User_Orders"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Orders"
-                android:layout_centerHorizontal="true"
-                android:textSize="25dp"/>
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimary"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Orders"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="160dp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="120dp"
+                    />
+
+            </androidx.appcompat.widget.Toolbar>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/toolbar_User_Orders"
+                android:id="@+id/recycler_admin_user_orders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                />
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

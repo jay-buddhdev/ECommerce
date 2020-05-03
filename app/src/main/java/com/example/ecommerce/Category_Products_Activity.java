@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ecommerce.Models.Products;
+import com.example.ecommerce.Prevalent.AdminAddNewProductActivity;
 import com.example.ecommerce.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -78,6 +79,8 @@ public class Category_Products_Activity extends AppCompatActivity
                 holder.txtProductPrice.setText("Price = "+ model.getPrice() +"$");
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 keys.add(position,adapter.getRef(position).getKey());
+                category.add(position,model.getCategory());
+
 
 
             }
@@ -112,7 +115,7 @@ public class Category_Products_Activity extends AppCompatActivity
             {
                 case ItemTouchHelper.LEFT:
                     adapter.notifyItemRemoved(viewHolder.getPosition());
-                    Intent intent = new Intent(Category_Products_Activity.this, Category_Products_Activity.class);
+                    Intent intent = new Intent(Category_Products_Activity.this, Admin_Change_Product_Detail_Activity.class);
                     intent.putExtra("key", keys.get(viewHolder.getPosition()));
                     intent.putExtra("pCategory", category.get(viewHolder.getPosition()));
                     startActivity(intent);
