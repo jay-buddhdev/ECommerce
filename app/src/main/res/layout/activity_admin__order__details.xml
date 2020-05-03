@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_Order_Details_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimary"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/back_arrow"
+                    />
+
+
+                <TextView
+                    android:id="@+id/toolbar_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="125dp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="100dp"
+                    />
+
+            </androidx.appcompat.widget.Toolbar>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_order_list_summary"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/toolbar_orders"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:cardBackgroundColor="@android:color/white"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order List"
+                    android:textSize="20dp"
+                    android:background="@android:color/white"
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_recycler_summary"
+                android:layout_below="@id/cardview_order_list_summary"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@android:color/white">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_order_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:scrollbars="vertical"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_order_details"
+                android:layout_below="@id/cardview_recycler_summary"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@android:color/white">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/customer_address_txtview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Address:"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:id="@+id/customer_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/customer_address_txtview"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="10dp"
+                    android:text="khsjkjjjbjbsbsvjvj"/>
+                <TextView
+                    android:id="@+id/order_date_time_txtview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@android:color/black"
+                    android:text="Date and Time :"
+                    android:textSize="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/customer_address"
+                    />
+                    <TextView
+                        android:layout_below="@id/customer_address"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_toRightOf="@id/order_date_time_txtview"
+                        android:textColor="@android:color/black"
+                        android:id="@+id/order_date_time"
+                        android:text="23 April"/>
+                    <TextView
+                        android:id="@+id/order_amount_txtview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@android:color/black"
+                        android:text="Amount :"
+                        android:textSize="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/order_date_time_txtview"
+                        />
+                    <TextView
+                        android:layout_below="@id/order_date_time_txtview"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:id="@+id/order_amount"
+                        android:textSize="15dp"
+                        android:layout_toRightOf="@id/order_amount_txtview"
+                        android:textColor="@android:color/holo_orange_dark"
+                        android:text="15000"/>
+                    <TextView
+                        android:id="@+id/order_type_txtview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@android:color/black"
+                        android:text="Type :"
+                        android:textSize="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/order_amount_txtview"
+                        />
+                    <TextView
+                        android:layout_below="@id/order_amount_txtview"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:id="@+id/order_type"
+                        android:textSize="15dp"
+                        android:layout_toRightOf="@id/order_type_txtview"
+                        android:textColor="@android:color/black"
+                        android:text="COD"/>
+                    <Button
+                        android:id="@+id/pay_btn_summary"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/order_type_txtview"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/button_sign_in"
+                        android:layout_marginLeft="10dp"
+                        android:text="Pay Online"
+                        android:padding="10dp"
+                        android:textSize="12dp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

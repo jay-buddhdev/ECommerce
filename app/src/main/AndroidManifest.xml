@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin_Change_Product_Detail_Activity"></activity>
+        <activity android:name=".Admin_Order_Details_Activity"></activity>
+        <activity android:name=".Admin_Order_ID_Activity" />
+        <activity android:name=".Admin_Change_Product_Detail_Activity" />
         <activity android:name=".Category_Products_Activity" />
         <activity android:name=".Admin_Orders_Activity" />
         <activity android:name=".Admin_edit_product_Activity" />

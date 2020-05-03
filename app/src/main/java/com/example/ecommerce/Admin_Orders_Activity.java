@@ -77,9 +77,17 @@ public class Admin_Orders_Activity extends AppCompatActivity {
 
         adapter=new FirebaseRecyclerAdapter<User_Order_Ph, User_Order_PhViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull User_Order_PhViewHolder holder, int position, @NonNull User_Order_Ph model) {
+            protected void onBindViewHolder(@NonNull User_Order_PhViewHolder holder, final int position, @NonNull User_Order_Ph model) {
                 holder.txtphoneNumber.setText(adapter.getRef(position).getKey());
-                Toast.makeText(Admin_Orders_Activity.this, adapter.getRef(position).getKey(), Toast.LENGTH_SHORT).show();
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i=new Intent(Admin_Orders_Activity.this,Admin_Order_ID_Activity.class);
+                        i.putExtra("key",adapter.getRef(position).getKey());
+                        startActivity(i);
+                        finish();
+                    }
+                });
             }
 
             @NonNull
