@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="Red">@android:color/holo_red_dark</color>
     <color name="Green">@android:color/holo_green_dark</color>
+    <color name="White">@android:color/white</color>
 
 
 

@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Admin_Order_ID_Activity extends AppCompatActivity {
     private DatabaseReference OrderUserRef;
     private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
     private TextView cusname;
     FirebaseRecyclerAdapter<User_Order_Ph_Order_Id, User_Order_Ph_Order_IdViewHolder> adapter;
     String Key=null;
@@ -32,10 +31,13 @@ public class Admin_Order_ID_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__order__i_d);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView=findViewById(R.id.recycler_User_Order_Id);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+
         cusname=findViewById(R.id.toolbar_name);
 
         Key=getIntent().getStringExtra("key");
