@@ -34,10 +34,10 @@ public class Admin_Order_ID_Activity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
+
         recyclerView=findViewById(R.id.recycler_User_Order_Id);
         recyclerView.setHasFixedSize(true);
-
+        recyclerView.setLayoutManager(layoutManager);
         cusname=findViewById(R.id.toolbar_name);
 
         Key=getIntent().getStringExtra("key");

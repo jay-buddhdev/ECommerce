@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,18 +50,20 @@ public class RegisterActivity extends AppCompatActivity {
     private String productRandomKey,downloadImageUrl,saveCurrentDate,saveCurrentTime;
     private Uri imageUri;
     private StorageReference ProductImageRef;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        firebaseAuth= FirebaseAuth.getInstance();
         ProfileImageRef= FirebaseStorage.getInstance().getReference().child("Profile Pictures");
         createAccountbtn=(Button)findViewById(R.id.register_btn);
         InputName=(EditText) findViewById(R.id.register_username_input);
         InputPhoneNumber=(EditText) findViewById(R.id.register_phone_number_input);
         InputPassword=(EditText) findViewById(R.id.register_password_input);
         InputAddress=(EditText)findViewById(R.id.register_address_input);
-        InputAddress=findViewById(R.id.register_email_input);
+        InputEmailAdress=findViewById(R.id.register_email_input);
         back_arrow=findViewById(R.id.back_arrow_register);
 
         loadingBar=new ProgressDialog(this);
@@ -223,54 +227,64 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void ValidatephoneNumber(final String name, final String phone, final String password, final String address, final String finalImage, final String email)
     {
-        final DatabaseReference RootRef;
-        RootRef= FirebaseDatabase.getInstance().getReference();
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!(dataSnapshot.child("Users").child(phone).exists()))
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
                 {
-                    HashMap<String,Object> userdataMap=new HashMap<>();
-                    userdataMap.put("phone",phone);
-                    userdataMap.put("password",password);
-                    userdataMap.put("name",name);
-                    userdataMap.put("address",address);
-                    userdataMap.put("email",email);
-                    userdataMap.put("image",finalImage);
-
-
-                    RootRef.child("User").child(phone).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    final DatabaseReference RootRef;
+                    RootRef= FirebaseDatabase.getInstance().getReference();
+                    RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(!(dataSnapshot.child("Users").child(phone).exists()))
                             {
-                                Toast.makeText(RegisterActivity.this,"Your Account has Been Created",Toast.LENGTH_SHORT).show();
-                                loadingBar.dismiss();
-                                Intent  i=new Intent(RegisterActivity.this,LoginActivity.class);
-                                startActivity(i);
+                                HashMap<String,Object> userdataMap=new HashMap<>();
+                                userdataMap.put("phone",phone);
+                                userdataMap.put("password",password);
+                                userdataMap.put("name",name);
+                                userdataMap.put("address",address);
+                                userdataMap.put("email",email);
+                                userdataMap.put("image",finalImage);
+                                userdataMap.put("UID",FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+                                RootRef.child("User").child(phone).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(RegisterActivity.this,"Your Account has Been Created",Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                            Intent  i=new Intent(RegisterActivity.this,LoginActivity.class);
+                                            startActivity(i);
+                                        }
+                                        else
+                                        {
+                                            loadingBar.dismiss();
+                                            Toast.makeText(RegisterActivity.this, "Network Error Please Try Again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                             else
                             {
+                                Toast.makeText(RegisterActivity.this,"This "+phone+"Already Exist",Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Toast.makeText(RegisterActivity.this, "Network Error Please Try Again", Toast.LENGTH_SHORT).show();
+                                Intent i=new Intent(RegisterActivity.this,IntroActivity.class);
+                                startActivity(i);
+
                             }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
                         }
                     });
                 }
-                else
-                {
-                    Toast.makeText(RegisterActivity.this,"This "+phone+"Already Exist",Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
-                    Intent i=new Intent(RegisterActivity.this,IntroActivity.class);
-                    startActivity(i);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
+
     }
 }

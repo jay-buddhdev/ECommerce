@@ -1,7 +1,7 @@
 package com.example.ecommerce.Models;
 
 public class Users {
-    private String name,phone,image,password,email;
+    private String name,phone,image,password,email,UID;
     public Users()
     {
 
@@ -15,12 +15,21 @@ public class Users {
         this.image = image;
     }
 
-    public Users(String name, String phone, String image, String password, String email) {
+    public Users(String name, String phone, String image, String password, String email, String UID) {
         this.name = name;
         this.phone = phone;
         this.image = image;
         this.password = password;
         this.email = email;
+        this.UID = UID;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 
     public String getEmail() {

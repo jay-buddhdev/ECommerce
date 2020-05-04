@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ecommerce.Interface.ItemClickListner;
@@ -15,6 +16,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
     public TextView txtProductName,txtProductDescription,txtProductPrice;
     public ImageView imageView;
     public ItemClickListner listner;
+    public CardView layout;
     public ProductViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -22,6 +24,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         txtProductName=(TextView) itemView.findViewById(R.id.product_name);
         txtProductDescription=(TextView) itemView.findViewById(R.id.product_description);
         txtProductPrice=(TextView) itemView.findViewById(R.id.product_price);
+        layout=itemView.findViewById(R.id.item_layout_cardlayout);
     }
 
     public   void  setItemClickListener(ItemClickListner listener)

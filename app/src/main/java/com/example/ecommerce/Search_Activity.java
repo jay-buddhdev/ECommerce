@@ -53,6 +53,10 @@ public class Search_Activity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, final int position, @NonNull final Products model)
             {
                 if(model.getPname().contains(search)) {
+                    holder.txtProductPrice.setVisibility(View.VISIBLE);
+                    holder.txtProductDescription.setVisibility(View.VISIBLE);
+                    holder.txtProductName.setVisibility(View.VISIBLE);
+                    holder.layout.setVisibility(View.VISIBLE);
                     holder.txtProductName.setText(model.getPname());
                     holder.txtProductDescription.setText(model.getDescription());
                     holder.txtProductPrice.setText("Price = " + model.getPrice() + "$");
@@ -67,6 +71,13 @@ public class Search_Activity extends AppCompatActivity {
                             finish();
                         }
                     });
+                }
+                else
+                {
+                    holder.txtProductPrice.setVisibility(View.INVISIBLE);
+                    holder.txtProductDescription.setVisibility(View.INVISIBLE);
+                    holder.txtProductName.setVisibility(View.INVISIBLE);
+                    holder.layout.setVisibility(View.INVISIBLE);
                 }
 
 
