@@ -91,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(CartActivity.this,Chekout_Activity.class);
-                i.putExtra("Total_amount",total_price_checkout.getText());
+                i.putExtra("Total_amount",totalprice);
                 startActivity(i);
                 finish();
             }
@@ -113,7 +113,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
                 holder.txtProductName.setText(model.getPname());
-                holder.txtProductPrice.setText("Price " + model.getPrice() + "$");
+                holder.txtProductPrice.setText("Price=" +"Rs."+ model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.productImage);
                 oneTypeProductTPrice = (Integer.parseInt(model.getPrice()) * Integer.parseInt(model.getQuantity()));
                 OverralTotalPrice += oneTypeProductTPrice;
@@ -122,7 +122,7 @@ public class CartActivity extends AppCompatActivity {
 
                 if (position == adapter.getItemCount()-1) {
                     totalprice = String.valueOf(OverralTotalPrice);
-                    total_price_checkout.setText(totalprice);
+                    total_price_checkout.setText("Rs."+totalprice);
                 }
 
             }

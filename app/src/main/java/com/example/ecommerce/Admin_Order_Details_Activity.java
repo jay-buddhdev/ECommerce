@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 public class Admin_Order_Details_Activity extends AppCompatActivity {
 
     private DatabaseReference OrderUserRef_Recycler;
+    private DatabaseReference OrderUserRef_Recycler_User;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     String Product_key=null;
@@ -57,14 +58,6 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
 
         back=findViewById(R.id.back_arrow_admin_order);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(Admin_Order_Details_Activity.this,Admin_Order_ID_Activity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         Product_key=getIntent().getStringExtra("Product_key");
         user_phone=getIntent().getStringExtra("user_phone");
@@ -73,10 +66,20 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         OrderUserRef_Recycler= FirebaseDatabase.getInstance().getReference().child("Orders").child("Admin View").child(user_phone).child(Product_key);
+        OrderUserRef_Recycler_User=FirebaseDatabase.getInstance().getReference().child("Orders").child("User View").child(user_phone).child(Product_key);
         cusname=findViewById(R.id.toolbar_name);
         cusname.setText(user_phone);
         fetchData();
         getOrderDetails();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Admin_Order_Details_Activity.this,Admin_Order_ID_Activity.class);
+                i.putExtra("key",Product_key);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     private void getOrderDetails()
@@ -101,6 +104,13 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
+                                                //Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                OrderUserRef_Recycler_User.child("Status").setValue("Confirmed")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
                                                 Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -115,6 +125,13 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 OrderUserRef_Recycler.child("Status").setValue("Packed")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                               // Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                OrderUserRef_Recycler_User.child("Status").setValue("Packed")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -136,6 +153,13 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
+                                              //  Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                OrderUserRef_Recycler_User.child("Status").setValue("Shipped")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
                                                 Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -152,6 +176,13 @@ public class Admin_Order_Details_Activity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 OrderUserRef_Recycler.child("Status").setValue("Delivered")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                               // Toast.makeText(Admin_Order_Details_Activity.this, "Order Status Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                OrderUserRef_Recycler_User.child("Status").setValue("Delivered")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

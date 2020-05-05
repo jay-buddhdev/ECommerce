@@ -156,7 +156,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(AdminAddNewProductActivity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(AdminAddNewProductActivity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
@@ -175,7 +175,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                         if(task.isSuccessful())
                         {
                             downloadImageUrl=task.getResult().toString();
-                            Toast.makeText(AdminAddNewProductActivity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
+                     //       Toast.makeText(AdminAddNewProductActivity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
                             saveProductintotoDatabase();
                         }
                     }

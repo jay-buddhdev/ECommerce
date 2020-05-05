@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                        parentDbName="Admins";
 
 
+
                    }
                });
        NotAdminLink.setOnClickListener(new View.OnClickListener() {

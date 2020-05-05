@@ -2,12 +2,25 @@ package com.example.ecommerce.Models;
 
 public class Orders_View
 {
-    private String id,Amount,status,date;
+    private String id,Amount,Status,date;
 
     public Orders_View() {
     }
 
+    public Orders_View(String id, String amount, String status, String date) {
+        this.id = id;
+        Amount = amount;
+        Status = status;
+        this.date = date;
+    }
 
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
 
     public String getId() {
         return id;
@@ -17,12 +30,7 @@ public class Orders_View
         this.id = id;
     }
 
-    public Orders_View(String id, String amount, String status, String date) {
-        this.id = id;
-        Amount = amount;
-        this.status = status;
-        this.date = date;
-    }
+
 
     public String getAmount() {
         return Amount;
@@ -32,13 +40,7 @@ public class Orders_View
         Amount = amount;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getDate() {
         return date;

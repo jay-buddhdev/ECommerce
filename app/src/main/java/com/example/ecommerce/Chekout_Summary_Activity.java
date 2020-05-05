@@ -310,6 +310,9 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
     public void onPaymentSuccess(String Razorpay_id) {
         inserInOrder(Razorpay_id);
         Toast.makeText(this, "Payment Success", Toast.LENGTH_SHORT).show();
+        Intent i=new Intent(Chekout_Summary_Activity.this,HomeActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override

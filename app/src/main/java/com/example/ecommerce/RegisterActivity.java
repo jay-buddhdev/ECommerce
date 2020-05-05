@@ -179,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(RegisterActivity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(RegisterActivity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -198,7 +198,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful())
                         {
                             downloadImageUrl=task.getResult().toString();
-                            Toast.makeText(RegisterActivity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
+                    //        Toast.makeText(RegisterActivity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
                             if(downloadImageUrl!=null)
                             {
                                 ValidatephoneNumber(name, phone, password, address, downloadImageUrl,email);

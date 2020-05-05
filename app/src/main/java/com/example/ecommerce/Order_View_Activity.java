@@ -67,6 +67,7 @@ public class Order_View_Activity extends AppCompatActivity {
                 holder.txtDate.setText(model.getDate());
                 holder.txtOrderAmount.setText("Rs."+model.getAmount());
                 holder.txtOrderid.setText("Order Id:"+adapter.getRef(position).getKey());
+                holder.status.setText(model.getStatus().toString());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

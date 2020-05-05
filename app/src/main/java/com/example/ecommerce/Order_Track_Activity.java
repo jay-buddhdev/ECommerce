@@ -3,6 +3,7 @@ package com.example.ecommerce;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ public class Order_Track_Activity extends AppCompatActivity {
 
     private ImageView line,placed,confirm_uncheck,confirm_check,packed_uncheck,packed_check,shipped_uncheck,shipped_check,delivered_uncheck,delivered_check;
    String key=null;
+   ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +38,16 @@ public class Order_Track_Activity extends AppCompatActivity {
         shipped_check=findViewById(R.id.imageView_order_shipped_check);
         delivered_uncheck=findViewById(R.id.imageView_order_complete_uncheck);
         delivered_check=findViewById(R.id.imageView_order_complete_check);
-
+        back=findViewById(R.id.back_arrow_order_track);
         key=getIntent().getStringExtra("key");
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Order_Track_Activity.this,Order_View_Activity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         getOrderdetail(key);
 
 

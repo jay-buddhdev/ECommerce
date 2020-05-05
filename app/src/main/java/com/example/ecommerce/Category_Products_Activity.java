@@ -89,7 +89,7 @@ public class Category_Products_Activity extends AppCompatActivity
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, final int position, @NonNull final Products model) {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price = "+ model.getPrice() +"$");
+                holder.txtProductPrice.setText("Price = "+ "Rs."+model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 keys.add(position,adapter.getRef(position).getKey());
                 category.add(position,model.getCategory());
