@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.ecommerce.Models.Cart;
 import com.example.ecommerce.Models.Orders_View;
@@ -29,6 +31,7 @@ public class Order_View_Activity extends AppCompatActivity {
     private DatabaseReference Orderef;
     final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Orders");
     Query query;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,15 @@ public class Order_View_Activity extends AppCompatActivity {
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
-
+        back=findViewById(R.id.back_arrow_orders_View);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Order_View_Activity.this,HomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         fetchData();
     }
 

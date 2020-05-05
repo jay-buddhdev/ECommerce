@@ -331,7 +331,7 @@ public class ProductDetailsActivity extends AppCompatActivity
            @Override
            protected void onBindViewHolder(@NonNull RelatedProductViewHolder holder, final int position, @NonNull final Products model) {
                holder.txtProductName.setText(model.getPname());
-               holder.txtProductPrice.setText("Price = "+ model.getPrice() +" $");
+               holder.txtProductPrice.setText("Price = "+ "Rs. "+model.getPrice());
                Picasso.get().load(model.getImage()).into(holder.imageView);
                holder.itemView.setOnClickListener(new View.OnClickListener() {
                    @Override
@@ -378,7 +378,7 @@ public class ProductDetailsActivity extends AppCompatActivity
                 {
                     Products products=dataSnapshot.getValue(Products.class);
                     productName.setText(products.getPname());
-                    productPrice.setText("Price = "+products.getPrice()+" $");
+                    productPrice.setText("Price = "+"Rs."+products.getPrice());
                     Picasso.get().load(products.getImage()).into(productimage);
                     image=products.getImage().toString();
                     product_price=products.getPrice();

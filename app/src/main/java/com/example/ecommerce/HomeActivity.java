@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, final int position, @NonNull final Products model) {
                 holder.txtProductName.setText(model.getPname());
                 holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price = "+ model.getPrice() +"$");
+                holder.txtProductPrice.setText("Price = "+"Rs." +model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -201,10 +201,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         {
             Intent i = new Intent(HomeActivity.this, Wishlist_activity.class);
             startActivity(i);
-        }
-        else if (id == R.id.nav_categories)
-        {
-
         }
         else if (id == R.id.nav_setting)
         {

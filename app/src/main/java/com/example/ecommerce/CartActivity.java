@@ -58,6 +58,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<String> category=new ArrayList<>();
     FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter;
     final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,15 @@ public class CartActivity extends AppCompatActivity {
         checkout = findViewById(R.id.cart_checkout);
         start_shopping = findViewById(R.id.cart_start_shopping);
         total_price_checkout = findViewById(R.id.cart_total_price);
-
+        back=findViewById(R.id.back_arrow_cart_view);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(CartActivity.this,HomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         ItemTouchHelper itemTouchHelper=new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 

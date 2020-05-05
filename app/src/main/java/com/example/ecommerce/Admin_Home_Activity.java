@@ -37,11 +37,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Paper;
 
 public class Admin_Home_Activity extends AppCompatActivity {
     private StorageReference CategoryImageRef;
     private CircleImageView Category_image;
-    private ImageView Change_Image;
+    private ImageView Change_Image,logout;
     private Uri imageUri;
     private ProgressDialog loadingBar;
     private String productRandomKey, downloadImageUrl, saveCurrentDate, saveCurrentTime;
@@ -84,7 +85,19 @@ public class Admin_Home_Activity extends AppCompatActivity {
         Category_name = findViewById(R.id.add_category_name);
         Category_image = findViewById(R.id.Category_profileimage);
         Change_Image = findViewById(R.id.Change_Profile_Category);
+        logout=findViewById(R.id.Logout_Admin);
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Paper.book().destroy();
+
+                Intent i = new Intent(Admin_Home_Activity.this, IntroActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
         Change_Image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +121,8 @@ public class Admin_Home_Activity extends AppCompatActivity {
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please Write Category name", Toast.LENGTH_SHORT).show();
         } else {
-            loadingBar.setTitle("Create Account");
-            loadingBar.setMessage("Please Wait, We are Checking the Credentails");
+            loadingBar.setTitle("Add Category");
+            loadingBar.setMessage("Please Wait, We are Adding Category ");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
@@ -136,7 +149,7 @@ public class Admin_Home_Activity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admin_Home_Activity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Admin_Home_Activity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -152,7 +165,7 @@ public class Admin_Home_Activity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             downloadImageUrl = task.getResult().toString();
-                            Toast.makeText(Admin_Home_Activity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(Admin_Home_Activity.this, "Getting Product image URL Successfull", Toast.LENGTH_SHORT).show();
                             if (downloadImageUrl != null) {
                                 addtoDatabase(name, downloadImageUrl);
                             } else {
@@ -188,7 +201,7 @@ public class Admin_Home_Activity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(Admin_Home_Activity.this, "Your Account has Been Created", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Admin_Home_Activity.this, "Your Product Has Been Added Successfully", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             } else {
                                 loadingBar.dismiss();

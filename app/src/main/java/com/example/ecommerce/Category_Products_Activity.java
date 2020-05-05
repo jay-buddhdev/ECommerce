@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecommerce.Models.Products;
@@ -44,6 +45,7 @@ public class Category_Products_Activity extends AppCompatActivity
     Query query;
     ArrayList<String> category=new ArrayList<>();
     ArrayList<String> keys=new ArrayList<>();
+    private TextView catname;
     final DatabaseReference productListRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
     @Override
@@ -56,11 +58,22 @@ public class Category_Products_Activity extends AppCompatActivity
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         productCategory=getIntent().getStringExtra("pCategory");
-
+        catname=findViewById(R.id.toolbar_cat_name);
+        catname.setText(productCategory);
+        back=findViewById(R.id.back_arrow_cat_admin);
         query = FirebaseDatabase.getInstance()
                 .getReference("Products").orderByChild("category").equalTo(productCategory);
 
         getProducts();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Category_Products_Activity.this,Admin_edit_product_Activity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         ItemTouchHelper itemTouchHelper=new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);

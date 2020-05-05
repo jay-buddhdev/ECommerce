@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#06cba8">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/splash_image"
+                android:text="Multi Kart"
+                android:layout_marginBottom="75dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="50dp"
+                android:textStyle="bold|italic"
+                android:textColor="@android:color/holo_orange_dark"/>
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/splash_image"
+                android:id="@+id/splash_image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Best Shopping Experience then Ever Before"
+                android:layout_below="@+id/splash_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:textSize="25dp"
+                android:padding="10dp"
+                android:textStyle="bold|italic"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textAlignment="center"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

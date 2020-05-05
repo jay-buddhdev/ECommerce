@@ -286,7 +286,7 @@ public class Chekout_Summary_Activity extends AppCompatActivity implements Payme
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
                 holder.txtProductName.setText(model.getPname());
-                holder.txtProductPrice.setText("Price " + model.getPrice() + "$");
+                holder.txtProductPrice.setText("Price " + "Rs. "+model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.productImage);
 
             }
