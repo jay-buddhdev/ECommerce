@@ -83,6 +83,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
+                android:autoLink="web"
                 android:text="Helo  HeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHelo
 HeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHeloHelo"
                 ></TextView>
